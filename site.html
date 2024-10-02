@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador de Viagem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px; /* Aumentando a largura máxima do container */
+            margin: auto;
+            padding: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .progress {
+            height: 20px;
+            width: 0%;
+            border-radius: 5px;
+        }
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: 2px;
+            font-size: 0.9em;
+            color: #fff;
+        }
+        .checklist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Alinha as seções com espaço entre elas */
+            gap: 20px; /* Adiciona um espaço entre as colunas */
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+            flex: 1 1 250px; /* Flex item com um tamanho base */
+            min-width: 220px; /* Tamanho mínimo para dispositivos menores */
+            max-width: 300px; /* Tamanho máximo para dispositivos maiores */
+            font-size: 0.9em; /* Tamanho da fonte */
+            border: 1px solid #ccc; /* Borda para melhor visualização */
+            border-radius: 5px; /* Borda arredondada */
+            padding: 10px; /* Espaçamento interno */
+            background-color: #f9f9f9; /* Fundo suave */
+            margin: 0; /* Remove margem padrão */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para as seções */
+            height: auto; /* Permite que a altura se ajuste ao conteúdo */
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 0;
+            text-align: center; /* Centraliza o título */
+        }
+        .checklist li {
+            text-align: left; /* Alinhamento à esquerda dos itens do checklist */
+            margin-bottom: 5px; /* Espaçamento entre os itens */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Progresso de Organização da Viagem</h1>
+        <div class="progress-bar">
+            <div id="progress" class="progress">
+                <span id="progress-text" class="progress-text">0%</span>
+            </div>
+        </div>
+        <p id="status-text">Você ainda não começou a organizar sua viagem, né? Que tal sair do <strong>0%</strong>? Vamos lá! 😢</p>
+
+        <!-- Ordem de Prioridade -->
+        <div class="checklist-container">
+            <div>
+                <div class="section-title">1. Escolhendo o Destino <span id="progress-destination">0% 😢</span></div>
+                <ul class="checklist" data-section="destination">
+                    <li><input type="checkbox" class="task" /> Definir o tipo de viagem (praia, montanha, etc.)</li>
+                    <li><input type="checkbox" class="task" /> Verificar o clima e a estação do destino</li>
+                    <li><input type="checkbox" class="task" /> Checar necessidade de visto, vacinas ou documentos especiais</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">2. Planejamento Financeiro <span id="progress-financial">0% 😢</span></div>
+                <ul class="checklist" data-section="financial">
+                    <li><input type="checkbox" class="task" /> Montar o orçamento estimado de passagens, hospedagem e extras</li>
+                    <li><input type="checkbox" class="task" /> Pesquisar e comparar preços de passagens</li>
+                    <li><input type="checkbox" class="task" /> Reservar passagens com antecedência</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">3. Documentação e Preparativos <span id="progress-documentation">0% 😢</span></div>
+                <ul class="checklist" data-section="documentation">
+                    <li><input type="checkbox" class="task" /> Verificar validade do passaporte e providenciar visto</li>
+                    <li><input type="checkbox" class="task" /> Contratar seguro de viagem</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">4. Hospedagem <span id="progress-accommodation">0% 😢</span></div>
+                <ul class="checklist" data-section="accommodation">
+                    <li><input type="checkbox" class="task" /> Pesquisar e reservar hospedagem (hotel, hostel, etc.)</li>
+                    <li><input type="checkbox" class="task" /> Verificar avaliações e localização da hospedagem</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">5. Roteiro de Viagem <span id="progress-itinerary">0% 😢</span></div>
+                <ul class="checklist" data-section="itinerary">
+                    <li><input type="checkbox" class="task" /> Listar as principais atrações do destino</li>
+                    <li><input type="checkbox" class="task" /> Organizar os dias e atividades de acordo com o roteiro</li>
+                    <li><input type="checkbox" class="task" /> Considerar tempo de descanso e ajustes no roteiro</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">6. Transporte Local <span id="progress-transport">0% 😢</span></div>
+                <ul class="checklist" data-section="transport">
+                    <li><input type="checkbox" class="task" /> Pesquisar opções de transporte local (aluguel de carro, transporte público)</li>
+                    <li><input type="checkbox" class="task" /> Instalar aplicativos de transporte (Uber, Lyft)</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">7. Saúde e Segurança <span id="progress-health">0% 😢</span></div>
+                <ul class="checklist" data-section="health">
+                    <li><input type="checkbox" class="task" /> Providenciar vacinas obrigatórias e montar farmácia de viagem</li>
+                    <li><input type="checkbox" class="task" /> Ter uma cópia digital de documentos importantes</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">8. Bagagem <span id="progress-luggage">0% 😢</span></div>
+                <ul class="checklist" data-section="luggage">
+                    <li><input type="checkbox" class="task" /> Separar roupas adequadas ao clima e atividades</li>
+                    <li><input type="checkbox" class="task" /> Organizar eletrônicos e acessórios (carregadores, adaptadores)</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title">9. Imprevistos <span id="progress-unknowns">0% 😢</span></div>
+                <ul class="checklist" data-section="unknowns">
+                    <li><input type="checkbox" class="task" /> Salvar dinheiro extra para emergências</li>
+                    <li><input type="checkbox" class="task" /> Ter cópia digital de todos os documentos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para calcular o progresso
+        function updateProgress() {
+            const tasks = document.querySelectorAll('.task');
+            const progress = document.getElementById('progress');
+            const progressText = document.getElementById('progress-text');
+            const statusText = document.getElementById('status-text');
+            let completedTasks = 0;
+
+            // Atualiza o progresso de cada seção
+            const sections = document.querySelectorAll('.checklist');
+            sections.forEach(section => {
+                const tasksInSection = section.querySelectorAll('.task');
+                let completedInSection = Array.from(tasksInSection).filter(task => task.checked).length;
+                let totalInSection = tasksInSection.length;
+                let percentageInSection = (completedInSection / totalInSection) * 100;
+
+                // Atualiza a porcentagem e emoji no título da seção
+                const sectionId = section.getAttribute('data-section');
+                const emoji = getEmoji(percentageInSection);
+                document.getElementById(`progress-${sectionId}`).innerText = `${percentageInSection.toFixed(0)}% ${emoji}`;
+            });
+
+            // Calcula o progresso total
+            tasks.forEach(task => {
+                if (task.checked) {
+                    completedTasks++;
+                }
+            });
+
+            const totalPercentage = (completedTasks / tasks.length) * 100;
+            progress.style.width = totalPercentage + '%';
+            progressText.textContent = totalPercentage.toFixed(0) + '%';
+            
+            // Atualiza a mensagem de status com base no percentual total
+            if (totalPercentage === 0) {
+                statusText.innerHTML = 'Você ainda não começou a organizar sua viagem, né? Que tal sair do <strong>0%</strong>? Vamos lá! 😢';
+            } else if (totalPercentage <= 50) {
+                statusText.innerHTML = `Organizar a viagem no começo é difícil, né? Mas vamos chegar lá! A sua viagem está <strong>${totalPercentage.toFixed(0)}%</strong> organizada. Não desista! ⌛`;
+                progress.style.backgroundColor = '#f4bd40'; // Amarelo
+            } else if (totalPercentage < 100) {
+                statusText.innerHTML = `Opa, já passamos da metade dessa organização hein? Desistir agora é não valorizar o tempo gasto até aqui! Sua viagem já está <strong>${totalPercentage.toFixed(0)}%</strong> organizada! Falta pouco... 🧳`;
+                progress.style.backgroundColor = '#45D0C1'; // Azul
+            } else {
+                statusText.innerHTML = `Boa! Você concluiu a organização da sua viagem! Parabéns. Agora a sua viagem está <strong>${totalPercentage.toFixed(0)}%</strong> organizada! ✅`;
+                progress.style.backgroundColor = '#B32'; // Verde
+            }
+        }
+
+        // Função para obter o emoji com base na porcentagem
+        function getEmoji(percentage) {
+            if (percentage === 0) return '😢';
+            if (percentage <= 50) return '⌛';
+            if (percentage < 100) return '🧳';
+            return '✅';
+        }
+
+        // Adiciona evento para atualizar o progresso quando a checkbox é alterada
+        const tasks = document.querySelectorAll('.task');
+        tasks.forEach(task => {
+            task.addEventListener('change', updateProgress);
+        });
+    </script>
+</body>
+</html>
